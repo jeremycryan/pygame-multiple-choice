@@ -15,7 +15,7 @@ class Main(object):
         this code automatically runs. """
     def __init__(self):
         self.g = Globals()
-        self.globals.question_set = QuestionSet(QUESTION_PATH)
+        self.g.question_set = QuestionSet(QUESTION_PATH)
         self.loop()
 
     """ Main loop. Code in here runs repeatedly until something stops it. """
@@ -23,7 +23,7 @@ class Main(object):
 
         i = 0
         while i < 3:
-            print(self.globals.question_set.questions[i])
+            print(self.g.question_set.questions[i])
             i += 1
             pass
 
