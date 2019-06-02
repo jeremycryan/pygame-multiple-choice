@@ -62,7 +62,7 @@ class QuestionSet(object):
     """ Initialization method for QuestionSet. Makes a list of Question objects
         by reading from a file, located at 'text_path' """
     def __init__(self, text_path):
-        file_obj = open(text_path, 'rb')
+        file_obj = open(text_path, 'r')
         text = file_obj.read()
         file_obj.close()
         self.parse_all_questions(text)

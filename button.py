@@ -21,6 +21,7 @@ class AnswerButton(object):
         #   defined as the location of the center of the button, in
         #   pixels from the origin.
         self.pos = (0, 0)
+        self.target_pos = self.pos
         self.w = self.surf.get_width()
         self.h = self.surf.get_height()
 
@@ -133,6 +134,7 @@ class AnswerButton(object):
             y = int(FRAME_HEIGHT/2 + BUTTON_Y_OFFSET + 3*self.h/2 + BUTTON_BORDER)
 
         self.pos = (x, y)
+        self.target_pos = self.pos
         self.appear_time = n * 0.2
 
     """ Toggles the value of the selected attribute, such as when mouse is
@@ -160,10 +162,25 @@ class AnswerButton(object):
         if self.scale < 0:
             self.scale = 0
 
+        #   Update position with proportional control
+        dx = self.target_pos[0] - self.pos[0]
+        dy = self.target_pos[1] - self.pos[1]
+
+        speed = 10
+        deltax = dx * dt * speed
+        deltay = dy * dt * speed
+        if abs(deltax) > abs(dx): deltax = dx
+        if abs(deltay) > abs(dy): deltay = dy
+
+        self.pos = (self.pos[0] + deltax, self.pos[1] + deltay)
+
         #   Update internal time, and appear if necessary
         self.time += dt
         if self.time > self.appear_time and not self.visible and self.appear_time < 1000:
             self.visible = True
+
+    def move_to_center(self):
+        self.target_pos = (int(FRAME_WIDTH/2), int(FRAME_HEIGHT/2) + 80)
 
 """ Class for the submit button """
 class SubmitButton(AnswerButton):
@@ -182,6 +199,7 @@ class SubmitButton(AnswerButton):
             #   defined as the location of the top left corner of the button, in
             #   pixels from the origin.
             self.pos = (0, 0)
+            self.target_pos = self.pos
             self.w = self.surf.get_width()
             self.h = self.surf.get_height()
             self.scale = 1.0
@@ -233,6 +251,7 @@ class SubmitButton(AnswerButton):
             x = int(FRAME_WIDTH/2)
             y = FRAME_HEIGHT - self.h/2 + SUBMIT_BUTTON_Y_OFFSET
             self.pos = x, y
+            self.target_pos = self.pos
 
         """ Keep this button as True as long as it has been clicked """
         def toggle_select(self):

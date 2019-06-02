@@ -138,7 +138,7 @@ class QuestionFrame(Frame):
         while True:
 
             #   Don't spend too long in the end phase
-            if time.time() - end_start > 0.4:
+            if time.time() - end_start > 0.5:
                 return
 
             #   Determine how long it has been since last loop
@@ -160,9 +160,12 @@ class QuestionFrame(Frame):
             for button in buttons:
                 button.update(dt)
                 button.hovered = False
-                if button.selected:
+                if button.selected and button is not submit_button:
                     one_button_selected = True
+                    button.move_to_center()
                 else:
+                    button.disappearing = True
+                if time.time() - end_start > 0.3:
                     button.disappearing = True
                 button.draw(one_button_selected)
 
