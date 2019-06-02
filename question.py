@@ -33,7 +33,8 @@ class Question(object):
                 break
 
         #   Randomly shuffle the order of the answer options
-        random.shuffle(self.answers)
+        if RANDOMIZE_ANSWER_ORDER:
+            random.shuffle(self.answers)
 
         #   If an answer is "all of the above" or "none of the above", make sure
         #   it's displayed last... otherwise it makes no sense!

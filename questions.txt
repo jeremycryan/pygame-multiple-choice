@@ -1,17 +1,17 @@
 Which element has atomic number 6?
-*Carbon
-Oxygen
-Helium
-Boron
+*carbon
+oxygen
+helium
+boron
 
 What is the capital of Sweden?
 *Stockholm
 Ghent
-Reykjavík
+Reykjavik
 Amsterdam
 
-How much wood could a woodchuck chuck?
-*Ten pounds
-Half an ounce
-Three
-All of the above
+How much wood could a woodchuck chuck, if a woodchuck could chuck wood?
+*ten pounds
+half an ounce
+a log
+all of the above
