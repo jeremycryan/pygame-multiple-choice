@@ -6,6 +6,7 @@
 BLACK = (0, 0, 0)                           #   Use constants for colors
 WHITE = (255, 255, 255)
 GREEN = (50, 180, 52)
+GRAY = (95, 115, 127)
 
 WINDOW_NAME = "Multiple Choice Test"
 WINDOW_WIDTH = 1280
@@ -38,6 +39,14 @@ ANSWER_FONT_COLOR_SELECT = WHITE
 SUBMIT_FONT = "Montserrat-Bold.otf"
 SUBMIT_FONT_SIZE = 25
 SUBMIT_FONT_COLOR = WHITE
+
+CUR_NUM_FONT = "Montserrat-Bold.otf"
+CUR_NUM_FONT_SIZE = 30
+CUR_NUM_FONT_COLOR = WHITE
+
+TOT_NUM_FONT = "Montserrat-Medium.otf"
+TOT_NUM_FONT_SIZE = 22
+TOT_NUM_FONT_COLOR = GRAY
 
 ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"     #   This is important
 

@@ -59,6 +59,28 @@ class QuestionFrame(Frame):
 
         return surfs
 
+
+    """ Draws the current question number, and total questions, on the
+        screen. This also generates the text surfaces, so should only be run
+        once per frame. """
+    def draw_cur_num(self):
+        num = self.g.current_question + 1
+        total = len(self.g.question_set.questions)
+
+        #   Create text surfaces
+        cur_num_render = self.g.cur_num_font.render(str(num), 1,
+                                                    CUR_NUM_FONT_COLOR)
+        tot_num_render = self.g.tot_num_font.render("of " + str(total), 1,
+                                                    TOT_NUM_FONT_COLOR)
+
+        #   Draw them on the screen
+        self.g.screen.blit(cur_num_render,
+                           (int(897 - cur_num_render.get_width()/2),
+                            (int(101 - cur_num_render.get_height()/2))))
+        self.g.screen.blit(tot_num_render, (945, 98))
+        
+        
+
     """ Draws the text for the question on the screen """
     def draw_question(self, surfs):
         line_height = surfs[0].get_height()
@@ -91,6 +113,7 @@ class QuestionFrame(Frame):
 
         then = time.time()
         self.g.screen.blit(background, (0, 0))
+        self.draw_cur_num()
                            
         while True:
 

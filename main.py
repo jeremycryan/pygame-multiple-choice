@@ -51,6 +51,8 @@ class Globals(object):
         self.question_font = pygame.font.Font("fonts/" + QUESTION_FONT, QUESTION_FONT_SIZE)
         self.answer_font = pygame.font.Font("fonts/" + ANSWER_FONT, ANSWER_FONT_SIZE)
         self.submit_font = pygame.font.Font("fonts/" + SUBMIT_FONT, SUBMIT_FONT_SIZE)
+        self.cur_num_font = pygame.font.Font("fonts/" + CUR_NUM_FONT, CUR_NUM_FONT_SIZE)
+        self.tot_num_font = pygame.font.Font("fonts/" + TOT_NUM_FONT, TOT_NUM_FONT_SIZE)
 
         self.clock = pygame.time.Clock()
 
@@ -85,7 +87,7 @@ class Globals(object):
             screen = pygame.transform.scale(self.screen, WINDOW_SIZE)
         self.screen_commit.blit(screen, (0, 0))
         pygame.display.flip()
-        self.clock.tick(30)
+        self.clock.tick(50)
 
     """ Returns the position of the mouse on the screen """
     def mouse_pos(self):
