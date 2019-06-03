@@ -151,7 +151,8 @@ class AnswerButton(object):
 
         #   Update scale with proportional control
         if self.disappearing:
-            self.target_scale = -0.2
+            self.scale_p = 10
+            self.target_scale = -0.05
         ds = self.target_scale - self.scale
         delta = ds * dt * self.scale_p
         if abs(delta) > abs(ds):
@@ -204,7 +205,7 @@ class SubmitButton(AnswerButton):
             self.h = self.surf.get_height()
             self.scale = 1.0
             self.target_scale = 1.0
-            self.scale_p = 12
+            self.scale_p = 15
 
             #   Booleans for being hovered or selected
             self.hovered = False

@@ -90,7 +90,8 @@ class QuestionFrame(Frame):
         buttons += [submit_button]
 
         then = time.time()
-        time.sleep(0.001)
+        self.g.screen.blit(background, (0, 0))
+                           
         while True:
 
             #   Determine how long it has been since last loop
@@ -110,7 +111,7 @@ class QuestionFrame(Frame):
                     mouse_button_up = True
 
             #   Draw the background
-            self.g.screen.blit(background, (0, 0))
+            self.g.screen.blit(background, (240, 240), (240, 240, 800, 480))
 
             #   Draw the question
             self.draw_question(question_surfs)
@@ -138,7 +139,7 @@ class QuestionFrame(Frame):
         while True:
 
             #   Don't spend too long in the end phase
-            if time.time() - end_start > 0.5:
+            if time.time() - end_start > 0.6:
                 return
 
             #   Determine how long it has been since last loop
@@ -151,7 +152,7 @@ class QuestionFrame(Frame):
             mpos = self.g.mouse_pos()
 
             #   Draw the background
-            self.g.screen.blit(background, (0, 0))
+            self.g.screen.blit(background, (240, 240), (240, 240, 800, 480))
 
             #   Draw the question
             self.draw_question(question_surfs)

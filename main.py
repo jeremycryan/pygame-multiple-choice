@@ -85,7 +85,7 @@ class Globals(object):
             screen = pygame.transform.scale(self.screen, WINDOW_SIZE)
         self.screen_commit.blit(screen, (0, 0))
         pygame.display.flip()
-        self.clock.tick(50)
+        self.clock.tick(30)
 
     """ Returns the position of the mouse on the screen """
     def mouse_pos(self):
