@@ -34,7 +34,8 @@ In the newly-created ```pygame-multiple-choice``` file, you can run one of the f
 ### Input your own test
 Now that you have an idea of how the program works, you can edit ```questions.txt``` to include your own multiple choice questions. It expects the syntax detailed below:
 
-```What is the airspeed velocity of an unladen swallow?
+```
+What is the airspeed velocity of an unladen swallow?
 *African or European?
 Well... I don't know that
 About 20 MPH
