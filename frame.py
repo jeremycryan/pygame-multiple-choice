@@ -129,9 +129,42 @@ class QuestionFrame(Frame):
             #   Update event flags
             mouse_button_up = False
             one_button_selected = False
+            key_right = False
+            key_left = False
+            key_up = False
+            key_down = False
+            key_enter = False
+            next_key = None
             for event in events:
                 if event.type == pygame.MOUSEBUTTONUP:
                     mouse_button_up = True
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP: key_up = True
+                    if event.key == pygame.K_DOWN: key_down = True
+                    if event.key == pygame.K_LEFT: key_left = True
+                    if event.key == pygame.K_RIGHT: key_right = True
+                    if event.key == pygame.K_RETURN: key_enter = True
+
+            #   Interpret keypresses
+            if not any([button.selected for button in buttons]):
+                if any([key_up, key_down, key_left, key_right]):
+                    buttons[0].click()
+
+            else:
+                sel_idx = None
+                for idx, b in enumerate(buttons):
+                    if b.selected:
+                        sel_idx = idx
+                
+                next_idx = sel_idx
+                if key_up and sel_idx > 1: next_idx -= 2
+                elif key_down and sel_idx < 2: next_idx += 2
+                elif key_left and sel_idx%2: next_idx -= 1
+                elif key_right and not sel_idx%2: next_idx += 1
+
+                if not buttons[next_idx].selected:
+                    next_key = buttons[next_idx]
+                
 
             #   Draw the background
             self.g.screen.blit(background, (240, 240), (240, 240, 800, 480))
@@ -143,7 +176,7 @@ class QuestionFrame(Frame):
             for button in buttons:
                 button.update(dt)
                 button.check_hover(mpos)
-                if mouse_button_up and button.hovered:
+                if (mouse_button_up and button.hovered) or button is next_key:
                     for b in buttons:
                         if button is not b and button is not submit_button:
                             b.selected = False
@@ -152,7 +185,7 @@ class QuestionFrame(Frame):
                     one_button_selected = True
                 button.draw(one_button_selected)
 
-            if submit_button.selected:
+            if submit_button.selected or key_enter:
                 break
 
             #   Update screen
@@ -163,7 +196,7 @@ class QuestionFrame(Frame):
 
             #   Don't spend too long in the end phase
             if time.time() - end_start > 0.6:
-                return
+                return self.g.screen.copy()
 
             #   Determine how long it has been since last loop
             now = time.time()

@@ -24,10 +24,12 @@ class Main(object):
     """ Main loop. Code in here runs repeatedly until something stops it. """
     def loop(self):
 
+        screen_cap = None
         while self.g.current_question < len(self.g.question_set.questions):
             new_frame = QuestionFrame(self.g)
-            new_frame.main()
+            screen_cap = new_frame.main()
             self.g.current_question += 1
+        self.g.close_game()
 
 
 """ This object stores global values and variables so they can be passed
@@ -72,8 +74,7 @@ class Globals(object):
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+                self.close_game()
         return events, dt
 
     """ Fills the screen with black """
@@ -93,6 +94,11 @@ class Globals(object):
     def mouse_pos(self):
         #   TODO account for screen scaling
         return pygame.mouse.get_pos()
+
+    """ Closes the window """
+    def close_game(self):
+        pygame.quit()
+        sys.exit()
 
 
 # This is the place the program goes to when you run it with python. Right
