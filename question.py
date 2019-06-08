@@ -28,7 +28,7 @@ class Question(object):
         #   Finds the correct answer by checking for asterisks
         for idx, answer in enumerate(self.answers):
             if answer[0] == "*":
-                self.correct_answer = idx
+                self.correct_answer = answer[1:]
                 self.answers[idx] = answer[1:]  #   Remove the asterisk
                 break
 

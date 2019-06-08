@@ -89,6 +89,9 @@ class AnswerButton(object):
     #TODO account for screen scaling with mouse position
     def check_hover(self, mpos):
 
+        if not self.visible:
+            return False
+
         mx = mpos[0]
         my = mpos[1]
         x = self.pos[0]
@@ -114,7 +117,7 @@ class AnswerButton(object):
 
         #   If you made it this far, the mouse is over the button.
         self.target_scale = 1.02
-        if self.h < 100:
+        if self.h < 125:
             self.target_scale = 1.1
         self.hovered = True
 
@@ -257,3 +260,43 @@ class SubmitButton(AnswerButton):
         """ Keep this button as True as long as it has been clicked """
         def toggle_select(self):
             self.selected = True
+
+
+class ContinueButton(SubmitButton):
+
+        """ Initialize method for ContinueButton """
+        def __init__(self, text, globals):
+            self.g = globals
+            self.text = text
+
+            #   Load image files for button in different combinations of being
+            #   currently selected and being hovered by the mouse.
+            self.surf = self.g.load_image("images/score_button.png")
+            self.hover_surf = self.g.load_image("images/score_button_hover.png")
+
+            #   Set a position to render and save width and height. The position is
+            #   defined as the location of the top left corner of the button, in
+            #   pixels from the origin.
+            self.pos = (0, 0)
+            self.target_pos = self.pos
+            self.w = self.surf.get_width()
+            self.h = self.surf.get_height()
+            self.scale = 1.0
+            self.target_scale = 1.0
+            self.scale_p = 15
+
+            #   Booleans for being hovered or selected
+            self.hovered = False
+            self.selected = False
+            self.visible = False
+            self.disappearing = False
+
+            self.time = 0
+            self.appear_time = 0.5
+
+            self.text_render = self.g.continue_font.render(text, 1,
+                                                    CONTINUE_FONT_COLOR)
+
+    
+        def draw(self):
+            SubmitButton.draw(self, True)
